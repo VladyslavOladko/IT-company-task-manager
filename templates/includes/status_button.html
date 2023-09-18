@@ -1,0 +1,5 @@
+<form method="post">
+  {% csrf_token %}
+  <input type="hidden" name="task_id" value="{{ task.id }}">
+  <button type="submit" class="btn {{ task.is_completed|yesno:'btn-success,btn-danger' }}">{{ task.is_completed|yesno:"Done,Pending" }}</button>
+</form>

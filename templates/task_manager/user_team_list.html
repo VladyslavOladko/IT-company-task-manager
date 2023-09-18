@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<title>Your teams</title>
+
+<h1>
+  Your teams:
+  {% if request.user.is_staff %}
+    <a style="float: right" class="btn btn-primary" href="{% url 'task_manager:teams-create' %}">+</a>
+  {% endif %}
+</h1>
+{% if team_list %}
+  <table class="table">
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+    </tr>
+
+    {% for team in user.teams.all %}
+    <tr>
+        <td>
+          {{ team.id }}
+        </td>
+        <td>
+          <a href="{{ team.get_absolute_url }}">
+            {{ team.name }}
+          </a>
+        </td>
+      </tr>
+    {% endfor %}
+
+  </table>
+{% else %}
+  <p>There are no one team</p>
+{% endif %}
+
+{% endblock %}

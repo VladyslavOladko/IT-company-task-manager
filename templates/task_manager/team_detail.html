@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <h1>
+    Team`s name: "{{ team.name }}"
+    {% if request.user.is_staff %}
+      <a style="float: right" class="btn btn-secondary" href="{% url 'task_manager:team-update' pk=team.id %}">Edit</a>
+    {% endif %}
+    {% if is_user_teammate %}
+      <form  method="post" action="{% url 'task_manager:delete-user' object.pk %}">
+        {% csrf_token %}
+        <button class="btn btn-danger" type="submit">Remove me from this team</button>
+      </form>
+    {% else %}
+      <form method="post" action="{% url 'task_manager:assign-user' object.pk %}">
+        {% csrf_token %}
+        <button class="btn btn-success" type="submit">Assign me to this team</button>
+      </form>
+    {% endif %}
+  </h1>
+
+  <div class="nl-3">
+    <h3>Teammates: </h3>
+    {% for teammate in team.teammates.all %}
+      <hr>
+      <p class="text-muted"><strong>ID: </strong>{{ teammate.id }}</p>
+      <p><strong>Full name: </strong>{{ teammate.first_name }} {{ teammate.last_name }} ({{ teammate.position }})</p>
+    {% endfor %}
+  </div>
+
+{% endblock %}

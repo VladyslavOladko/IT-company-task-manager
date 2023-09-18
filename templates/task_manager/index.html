@@ -1,0 +1,16 @@
+{% extends 'base.html'  %}
+
+{% block title %}
+  <title>Index</title>
+{% endblock %}
+
+{% block content %}
+
+<h1>Home page</h1>
+
+<ul>
+    <li>All teams, that use our task manager: {{ num_teams }}</li>
+    <li>All users: {{ num_users }}</li>
+</ul>
+
+{% endblock %}

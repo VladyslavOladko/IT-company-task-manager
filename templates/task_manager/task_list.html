@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load crispy_forms_filters %}
+{% load static %}
+
+{% block content %}
+
+<h1>
+  Teams Tasks:
+  <a style="float: right" class="btn btn-primary" href="{% url 'task_manager:task-create' %}">+</a>
+</h1>
+
+{% if tasks %}
+ <table class="table">
+    <tr>
+      <th>Name</th>
+      <th>Deadline</th>
+      <th>Status</th>
+      <th>Priority</th>
+      <th>Assignees:</th>
+      <th></th>
+    </tr>
+
+    {% for task in tasks %}
+        <td>
+          <a href="{{ task.get_absolute_url }}">
+            {{ task.name }}
+          </a>
+        </td>
+        <td>
+          {{ task.deadline }}
+        </td>
+        <td>
+          {% include "includes/status_button.html" %}
+        </td>
+        <td>
+          {{ task.priority }}
+        </td>
+        <td>
+          {{ task.assignees.all|join:", " }}
+        </td>
+        <td>
+          <button class="color-change-button btn btn-secondary" onclick="changeButtonClass(this)">
+            {% if item.button_clicked %}
+                Need Help!
+            {% else %}
+                If you need help click here
+            {% endif %}
+          </button>
+        </td>
+      </tr>
+    {% endfor %}
+  </table>
+  <script src="{% static 'js/change_button.js' %}"></script>
+{% else %}
+  <p>There are no one task</p>
+{% endif %}
+
+{% endblock %}

@@ -1,29 +1,58 @@
-<ul class="sidebar-nav list-group">
-    {% if user.is_authenticated %}
-        {% if request.user.is_staff %}
-            <li class="list-group-item">Hello admin</li>
-        {% else %}
-            <li class="list-group-item">Hello user</li>
-        {% endif %}
-        <li class="list-group-item">User: {{ user.username }}</li>
-        <li class="list-group-item"><a href="{% url 'logout' %}">Logout</a></li>
-    {% else %}
-        <li class="list-group-item"><a href="{% url 'login' %}">Login</a></li>
-        <li class="list-group-item"><a href="{% url 'task_manager:signup' %}">Sign Up</a></li>
-    {% endif %}
+{% load static %}
 
-    <br>
-    {% if request.user.is_staff %}
-        <li class="list-group-item"><a href="{% url 'task_manager:index' %}">Home</a></li>
-        <li class="list-group-item"><a href="{% url 'task_manager:team-list' %}">Teams</a></li>
-        <li class="list-group-item"><a href="{% url 'task_manager:user-team-list' %}">My teams</a></li>
-        <li class="list-group-item"><a href="{% url 'task_manager:task-list' %}">Team`s tasks</a></li>
-        <li class="list-group-item"><a href="{% url 'task_manager:user-task-list' %}">Own tasks</a></li>
-    {% else %}
-        <li class="list-group-item"><a href="{% url 'task_manager:index' %}">Home</a></li>
-        <li class="list-group-item"><a href="{% url 'task_manager:team-list' %}">Teams</a></li>
-        <li class="list-group-item"><a href="{% url 'task_manager:user-team-list' %}">My teams</a></li>
-        <li class="list-group-item"><a href="{% url 'task_manager:task-list' %}">Team`s tasks</a></li>
-        <li class="list-group-item"><a href="{% url 'task_manager:user-task-list' %}">Own tasks</a></li>
-    {% endif %}
-</ul>
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+
+    <a class="navbar-brand" href="#">Symphony</a>
+
+    <div class="collapse navbar-collapse">
+    <ul class="navbar-nav mr-auto sidenav">
+
+    {% if user.is_authenticated %}
+            {% if request.user.is_staff %}
+                <div class="user-panel-wrapper">
+                    <div>
+                        <li class="nav-item-without-link">{{ user.first_name }} {{ user.last_name }}</li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                        </li>
+                    </div>
+                        <img class="img-icon" src="{% static 'img/admin-icon.png' %}" alt="admin picture">
+                </div>
+            {% else %}
+                <div class="user-panel-wrapper">
+                    <div>
+                        <li class="nav-item-without-link">User: {{ user.username }}</li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                        </li>
+                    </div>
+                    <img class="img-icon" src="{% static 'img/user-icon.png' %}" alt="user picture">
+                </div>
+            {% endif %}
+        {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'task_manager:signup' %}">Sign Up</a>
+            </li>
+        {% endif %}
+
+        {% if request.user.is_staff %}
+            <li class="nav-item active"><a class="nav-link" href="{% url 'task_manager:index' %}">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'task_manager:team-list' %}">Teams</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'task_manager:user-team-list' %}">My teams</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'task_manager:task-list' %}">Team`s tasks</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'task_manager:user-task-list' %}">Own tasks</a></li>
+        {% else %}
+            <li class="nav-item active"><a class="nav-link" href="{% url 'task_manager:index' %}">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'task_manager:team-list' %}">Teams</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'task_manager:user-team-list' %}">My teams</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'task_manager:task-list' %}">Team`s tasks</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'task_manager:user-task-list' %}">Own tasks</a></li>
+        {% endif %}
+
+    </ul>
+  </div>
+
+</nav>

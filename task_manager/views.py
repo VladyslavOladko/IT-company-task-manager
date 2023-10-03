@@ -196,13 +196,13 @@ class TaskDetailView(LoginRequiredMixin, generic.DetailView):
 class TaskUpdateView(LoginRequiredMixin, generic.UpdateView):
 
     model = Task
-    form_class = TaskForm
+    form_class = TaskForm()
 
 
 class TaskCreateView(LoginRequiredMixin, generic.CreateView):
 
     model = Task
-    form_class = TaskForm
+    form_class = TaskForm()
 
 
 class TaskDeleteView(LoginRequiredMixin, generic.DetailView):

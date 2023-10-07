@@ -49,7 +49,7 @@ body {
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 3.5rem;
+  height: 70px;
   line-height: 3.5rem;
   background-color: #ccc;
 }
@@ -98,5 +98,177 @@ body {
     border: 1px solid;
     border-radius: 3px;
     display: block;
+}
+
+.link-to-absolute {
+    text-decoration: none;
+    color: black;
+}
+
+a.link-to-absolute:hover {
+    padding: 5px 1px;
+    background-color: #c9c7c7a3;
+    border-radius: 5px;
+    text-decoration: none;
+    color: black;
+}
+
+.header_container {
+    position: relative;
+    width: calc(100% - 230px);
+    margin-left: 230px;
+    margin-top: -30px;
+    height: 950px;
+    background: #ccc;
+    overflow: hidden;
+}
+
+.image_block {
+    height: 650px;
+    background: url(../img/headerPhoto.png);
+    background-position: center;
+}
+
+.filter {
+    position: absolute;
+    width: 100%;
+    height: 650px;
+    left: 0px;
+    top: 0px;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.company_name {
+    font-size: 20px;
+    color: #F3FFFD;
+}
+
+.achievement_block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    width: 99vw;
+    max-width: 1046px;
+    left: calc(50% - 1046px/2);
+    top: 104px;
+}
+
+.header_text_block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px;
+    color: #FFFFFF;
+    width: 701px;
+    height: 450px;
+}
+
+.header_text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #d1b897;
+}
+
+.header_text>h1 {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 7.5rem;
+    text-align: center;
+    letter-spacing: 10px;
+    margin: 5rem 0 2rem;
+}
+
+.header_text>h4 {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.5rem;
+    text-align: center;
+    letter-spacing: 5px;
+    margin: 0;
+}
+
+.achievement_section {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0px;
+    width: 1046px;
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 25px;
+    width: 300px;
+    height: 240px;
+    gap: 25px;
+    background: #FFFFFF;
+    box-shadow: 0px 13px 19px rgba(0, 0, 0, 0.07);
+    color: #c8a06a;
+}
+
+.section:hover {
+    background: #d1b897;
+    color: rgb(54 51 51) !important;
+}
+
+.support_img {
+    width: 120px;
+    margin: -25px;
+}
+
+.truck_img {
+    width: 105px;
+    margin: -15px -2px;
+}
+
+.section>h3 {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 32px;
+    letter-spacing: 1px;
+}
+
+.deadline-done {
+    justify-content: space-between;
+    width: 21.5rem;
+    display: flex;
+    align-items: center;
+    float: right;
+}
+
+.CRITICAL_priority {
+    color: #b72828;
+    font-weight: bold;
+}
+
+.URGENT_priority {
+    color: #e40d0d;
+}
+
+.HIGH_priority {
+    color: #ff7f00;
+}
+
+.MEDIUM_priority {
+    color: #dcc910;
+}
+
+.LOW_priority {
+    color: #38b238;
+}
+
+.priority-font {
+    padding: 5px 10px;
+    border-radius: 5px;
+    background: #edecec;
+
 }
 

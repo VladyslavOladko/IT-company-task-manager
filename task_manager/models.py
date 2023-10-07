@@ -71,19 +71,20 @@ class Team(models.Model):
 class Task(models.Model):
 
     PRIORITY = [
-        ("L", "Low"),
-        ("M", "Medium"),
-        ("H", "High"),
-        ("U", "Urgent"),
-        ("C", "Critical"),
+        ("LOW", "Low"),
+        ("MEDIUM", "Medium",),
+        ("HIGH", "High",),
+        ("URGENT", "Urgent",),
+        ("CRITICAL", "Critical",),
     ]
 
     name = models.CharField(max_length=255)
     description = models.TextField(max_length=1024)
     deadline = models.DateTimeField()
     is_completed = models.BooleanField()
+    is_need_help = models.BooleanField()
     priority = models.CharField(
-        max_length=1,
+        max_length=8,
         choices=PRIORITY,
     )
     task_type = models.ForeignKey(
@@ -99,6 +100,7 @@ class Task(models.Model):
         on_delete=models.CASCADE,
         related_name="tasks"
     )
+    is_need_help = models.BooleanField(default=False)
 
     class Meta:
         ordering = ["name"]

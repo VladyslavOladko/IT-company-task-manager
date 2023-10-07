@@ -6,12 +6,13 @@
 
 <h1>
   Teams Tasks:
-  <a style="float: right" class="btn btn-primary" href="{% url 'task_manager:task-create' %}">+</a>
+  <a style="float: right" class="btn btn-secondary" href="{% url 'task_manager:task-create' %}">+</a>
 </h1>
 
 {% if tasks %}
  <table class="table">
-    <tr>
+   <thead class="thead-light">
+     <tr>
       <th>Name</th>
       <th>Deadline</th>
       <th>Status</th>
@@ -19,28 +20,36 @@
       <th>Assignees:</th>
       <th></th>
     </tr>
+   </thead>
 
     {% for task in tasks %}
+    <a class="link-to-absolute" href="{{ task.get_absolute_url }}">
+        <tr>
         <td>
-          <a href="{{ task.get_absolute_url }}">
-            {{ task.name }}
-          </a>
+            <a class="link-to-absolute" href="{{ task.get_absolute_url }}">
+                {{ task.name }}
+            </a>
         </td>
         <td>
-          {{ task.deadline }}
+            <a class="link-to-absolute" href="{{ task.get_absolute_url }}">
+                {{ task.deadline }}
+            </a>
         </td>
         <td>
           {% include "includes/status_button.html" %}
         </td>
         <td>
-          {{ task.priority }}
+            <a class="link-to-absolute" href="{{ task.get_absolute_url }}">
+                {{ task.priority }}
+            </a>
         </td>
         <td>
           {{ task.assignees.all|join:", " }}
         </td>
         <td>
-          <button class="color-change-button btn btn-secondary" onclick="changeButtonClass(this)">
-            {% if item.button_clicked %}
+          <button class="{% if task.is_need_help %}need-help{% else %}not-need-help{% endif %}" onclick="changeButtonClass(this)">
+              {{ task.is_need_help }}
+            {% if task.is_need_help %}
                 Need Help!
             {% else %}
                 If you need help click here
@@ -49,6 +58,7 @@
         </td>
       </tr>
     {% endfor %}
+    </a>
   </table>
   <script src="{% static 'js/change_button.js' %}"></script>
 {% else %}

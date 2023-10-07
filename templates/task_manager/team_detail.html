@@ -20,13 +20,28 @@
     {% endif %}
   </h1>
 
-  <div class="nl-3">
-    <h3>Teammates: </h3>
+
+  <table class="table">
+    <thead class="thead-light">
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Position</th>
+      </tr>
+    </thead>
     {% for teammate in team.teammates.all %}
-      <hr>
-      <p class="text-muted"><strong>ID: </strong>{{ teammate.id }}</p>
-      <p><strong>Full name: </strong>{{ teammate.first_name }} {{ teammate.last_name }} ({{ teammate.position }})</p>
+    <tbody>
+      <tr>
+        <th>{{ teammate.first_name }}</th>
+        <th>{{ teammate.last_name }}</th>
+        <th>{{ teammate.email }}</th>
+        <th>{{ teammate.position }}</th>
+
+      </tr>
+    </tbody>
     {% endfor %}
-  </div>
+  </table>
+
 
 {% endblock %}

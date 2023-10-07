@@ -26,10 +26,12 @@ def index(request):
 
     num_teams = Team.objects.all().count
     num_users = Employee.objects.all().count
+    is_home_page = True
 
     context = {
         "num_teams": num_teams,
-        "num_users": num_users
+        "num_users": num_users,
+        "is_home_page": is_home_page,
     }
 
     return render(request, "task_manager/index.html", context=context)
@@ -196,13 +198,13 @@ class TaskDetailView(LoginRequiredMixin, generic.DetailView):
 class TaskUpdateView(LoginRequiredMixin, generic.UpdateView):
 
     model = Task
-    form_class = TaskForm()
+    form_class = TaskForm
 
 
 class TaskCreateView(LoginRequiredMixin, generic.CreateView):
 
     model = Task
-    form_class = TaskForm()
+    form_class = TaskForm
 
 
 class TaskDeleteView(LoginRequiredMixin, generic.DetailView):

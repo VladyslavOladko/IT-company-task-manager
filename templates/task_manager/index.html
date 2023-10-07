@@ -1,21 +1,38 @@
-{% extends 'base.html'  %}
+{% extends "base.html"  %}
 {% load static %}
 
 {% block title %}
-  <title>Index</title>
+  <title>Home page</title>
 {% endblock %}
 
-{% block content %}
+{% block inner_content %}
 
-<div>
-  <ul>
-    <div class="border-one">
-      Teams, that use Symphony: {{ num_teams }}
-    </div>
-    <div class="border-one">
-      All users: {{ num_users }}
-    </div>
-  </ul>
-</div>
 
+      <div class="header_container">
+        <div class="image_block">
+          <div class="filter"></div>
+        </div>
+        <div class="achievement_block">
+          <div class="header_text_block">
+            <div class="header_text">
+              <h1>Symphony</h1>
+              <h4>We know like keep work-life balance</h4>
+            </div>
+          </div>
+          <div class="achievement_section">
+            <div class="section">
+              <img src="{% static 'img/handshake.png'%}" alt="" class="truck_img" />
+              <h3>Teams, that use Symphony:</h3>
+            </div>
+            <div class="section">
+              <img src="{% static 'img/truck.png'%}" alt="" class="truck_img" />
+              <h3>All users:</h3>
+            </div>
+            <div class="section">
+              <img src="{% static 'img/insurance.png' %}" alt="" class="support_img" />
+              <h3>Personal professional technical support.</h3>
+            </div>
+          </div>
+        </div>
+      </div>
 {% endblock %}

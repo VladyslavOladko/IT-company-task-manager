@@ -52,7 +52,7 @@ class TeamSearchForm(forms.Form):
 class TaskForm(forms.ModelForm):
 
     assignees = forms.ModelMultipleChoiceField(
-        queryset=get_user_model().objects.all(),    # ???
+        queryset=get_user_model().objects.all(),
         widget=forms.CheckboxSelectMultiple,
         required=False,
     )

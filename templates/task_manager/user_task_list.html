@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% load crispy_forms_filters %}
-{% load static %}
 
 {% block content %}
 
@@ -48,18 +47,11 @@
               {{ task.assignees.all|join:", " }}
             </td>
             <td>
-               <button class="color-change-button btn btn-secondary" onclick="changeButtonClass(this)">
-                  {% if item.button_clicked %}
-                    Need Help!
-                  {% else %}
-                    If you need help click here
-                  {% endif %}
-              </button>
+               {% include "includes/need_help_button.html" %}
             </td>
          </tr>
     {% endfor %}
   </table>
-  <script src="{% static 'js/change_button.js' %}"></script>
 {% else %}
   <p>There are no one task</p>
 {% endif %}

@@ -5,7 +5,7 @@
   <h1>
     Team`s name: "{{ team.name }}"
     {% if request.user.is_staff %}
-      <a style="float: right" class="btn btn-secondary" href="{% url 'task_manager:team-update' pk=team.id %}">Edit</a>
+      <a style="float: right" class="btn btn-warning" href="{% url 'task_manager:team-update' pk=team.id %}">Edit</a>
     {% endif %}
     {% if is_user_teammate %}
       <form  method="post" action="{% url 'task_manager:delete-user' object.pk %}">

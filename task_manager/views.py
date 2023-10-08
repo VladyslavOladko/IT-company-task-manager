@@ -11,7 +11,7 @@ from task_manager.foms import (
     TaskForm,
     TaskStatusForm,
     TeamSearchForm,
-    CommentForm
+    CommentForm, TaskNeedHelpForm
 )
 
 from task_manager.models import (
@@ -151,15 +151,24 @@ class TaskListView(LoginRequiredMixin, generic.ListView):
     def get_context_data(self, **kwargs):
 
         context = super().get_context_data(**kwargs)
+        context["task_need_help_form"] = TaskNeedHelpForm()
         context["task_status_form"] = TaskStatusForm()
         return context
 
     def post(self, request, *args, **kwargs):
+        is_need_help_task_id = request.POST.get("is_need_help_task_id")
+        is_completed_task_id = request.POST.get("is_completed_task_id")
 
-        task_id = request.POST.get("task_id")
-        task = Task.objects.get(id=task_id)
-        task.is_completed = not task.is_completed
-        task.save()
+        if is_need_help_task_id:
+            task = Task.objects.get(id=is_need_help_task_id)
+            task.is_need_help = not task.is_need_help
+            task.save()
+
+        if is_completed_task_id:
+            task = Task.objects.get(id=is_completed_task_id)
+            task.is_completed = not task.is_completed
+            task.save()
+
         return redirect("task_manager:task-list")
 
 
@@ -172,7 +181,25 @@ class UserTaskListView(LoginRequiredMixin, generic.ListView):
         context = super().get_context_data(**kwargs)
         if self.request.user.is_authenticated:
             context["assignee"] = self.request.user
+        context["task_need_help_form"] = TaskNeedHelpForm()
+        context["task_status_form"] = TaskStatusForm()
         return context
+
+    def post(self, request, *args, **kwargs):
+        is_need_help_task_id = request.POST.get("is_need_help_task_id")
+        is_completed_task_id = request.POST.get("is_completed_task_id")
+
+        if is_need_help_task_id:
+            task = Task.objects.get(id=is_need_help_task_id)
+            task.is_need_help = not task.is_need_help
+            task.save()
+
+        if is_completed_task_id:
+            task = Task.objects.get(id=is_completed_task_id)
+            task.is_completed = not task.is_completed
+            task.save()
+
+        return redirect("task_manager:user-task-list")
 
 
 class TaskDetailView(LoginRequiredMixin, generic.DetailView):
@@ -245,4 +272,12 @@ class AddCommentView(LoginRequiredMixin, generic.CreateView):
 class CommentaryDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Commentary
     template_name = "task_manager/commentary_confirm_delete.html"
-    success_url = reverse_lazy("task_manager:task-list")
+
+    def get_success_url(self):
+        commentary = self.get_object()
+        task_id = commentary.task.id
+        task_url = reverse("task_manager:task-detail", kwargs={"pk": task_id})
+        return task_url
+
+    def post(self, request, *args, **kwargs):
+        return super().post(request, *args, **kwargs)

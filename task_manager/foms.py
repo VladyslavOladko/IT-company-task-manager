@@ -70,6 +70,11 @@ class TaskStatusForm(forms.Form):
     is_completed = forms.BooleanField(required=False, widget=forms.HiddenInput())
 
 
+class TaskNeedHelpForm(forms.Form):
+
+    is_need_help = forms.BooleanField(required=False, widget=forms.HiddenInput())
+
+
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Commentary

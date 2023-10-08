@@ -1,6 +1,7 @@
 html {
     position: relative;
     min-height: 100%;
+    font-size: 12px;
 }
 
 body {
@@ -8,11 +9,25 @@ body {
     margin-bottom: 4.5rem;
 }
 
+h3 {
+    margin: 10px 0px;
+}
+
 .nav-item-without-link {
     margin-left: 7px;
     color: #ccc;
     font-weight: bold;
     font-size: 14px;
+}
+
+.button-take-to-work {
+    padding: 10px 0px;
+    border-bottom: 1px solid;
+    border-color: #e7e4e4
+}
+
+.delete-comment {
+    float: right;
 }
 
 .rocket-img-wrapper {
@@ -49,7 +64,7 @@ body {
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 70px;
+  height: 52px;
   line-height: 3.5rem;
   background-color: #ccc;
 }
@@ -238,7 +253,7 @@ a.link-to-absolute:hover {
 
 .deadline-done {
     justify-content: space-between;
-    width: 21.5rem;
+    width: 30.5rem;
     display: flex;
     align-items: center;
     float: right;
@@ -272,3 +287,7 @@ a.link-to-absolute:hover {
 
 }
 
+.form-label {
+    font-size: 21px;
+    margin-top: 20px;
+}

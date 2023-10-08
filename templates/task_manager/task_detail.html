@@ -6,7 +6,7 @@
   <h1>
     Task`s name: "{{ task.name }}"
 
-    <a style="float: right; margin-left: 10px" class="btn btn-secondary" href="{% url 'task_manager:task-update' pk=task.id %}">Edit</a>
+    <a style="float: right; margin-left: 10px" class="btn btn-warning" href="{% url 'task_manager:task-update' pk=task.id %}">Edit</a>
     <a style="float: right" class="btn btn-danger" href="{% url 'task_manager:task-delete' pk=task.id %}">Delete</a>
 
   </h1>
@@ -29,31 +29,48 @@
     <div>{{ task.description }}</div>
   <br>
   <div class="nl-3">
-    <h3>Assignees: </h3>
-    {% if is_user_assignee %}
-      <p>Yoy already working with this task!</p>
-    {% else %}
-      <form  method="post" action="{% url 'task_manager:take-to-work' object.pk %}">
-        {% csrf_token %}
-        <button class="btn btn-success" type="submit">Take to work</button>
-      </form>
-    {% endif %}
 
-    {% for assignee in task.assignees.all %}
-      <hr>
-      <p class="text-muted"><strong>ID: </strong>{{ assignee.id }}</p>
-      <p><strong>Full name: </strong>{{ assignee.first_name }} {{ assignee.last_name }}</p>
-      <p><strong>Position: </strong>{{ assignee.position }}</p>
-    {% endfor %}
+    <h3>Assignees: </h3>
+
+      <table class="table">
+        <thead class="thead-light">
+          <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Position</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for assignee in task.assignees.all %}
+          <tr>
+            <th>{{ assignee.first_name }}</th>
+          <th>{{ assignee.last_name }}</th>
+          <th>{{ assignee.email }}</th>
+          <th>{{ assignee.position }}</th>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      {% if is_user_assignee %}
+        <p style="font-size: 12px">Yoy already working with this task!</p>
+      {% else %}
+        <form class="button-take-to-work"  method="post" action="{% url 'task_manager:take-to-work' object.pk %}">
+          {% csrf_token %}
+          <button class="btn btn-success" type="submit">Take to work</button>
+        </form>
+      {% endif %}
+
   </div>
-   <h5>Comments:</h5>
+   <h3 style="margin-top: 10px">Comments:</h3>
     {% for comment in task.comments.all %}
       <hr>
-      <p><strong>{{ comment.user.username }}</strong></p>
       <p>
-        <strong>Posted:</strong>
-        {{ comment.created_time }}
+        <strong>{{ comment.user.username }}</strong>
+        at {{ comment.created_time }}
       </p>
+
       <p>
         {{ comment.content }}
         <a class="delete-comment btn btn-danger" href="{% url 'task_manager:commentary-delete' pk=comment.id %}">Delete</a>
@@ -67,7 +84,7 @@
         {% csrf_token %}
         <label for="content" class="form-label"><strong>Add your comment</strong></label>
         <textarea class="form-control mb-2" style="height: 100px" name="content"></textarea>
-        <input class="btn btn-primary" type="submit" value="Add comment">
+        <input style="margin-bottom: 10px;" class="btn btn-secondary" type="submit" value="Add comment">
       </form>
     {% else %}
       <a href="{% url 'login' %}">Login to add comments!</a>

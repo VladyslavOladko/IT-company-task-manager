@@ -2,7 +2,6 @@ from django import forms
 
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
-from django.http import HttpRequest
 
 from task_manager.models import (
     Employee,
@@ -21,8 +20,7 @@ class SignUpForm(UserCreationForm):
             "email",
             "first_name",
             "last_name",
-            "position",
-            "is_superuser"
+            "position"
         )
 
 
@@ -36,7 +34,7 @@ class TeamForm(forms.ModelForm):
 
     class Meta:
         model = Team
-        fields = "__all__"
+        fields = ("name",)
 
 
 class TeamSearchForm(forms.Form):
@@ -51,15 +49,16 @@ class TeamSearchForm(forms.Form):
 
 class TaskForm(forms.ModelForm):
 
-    assignees = forms.ModelMultipleChoiceField(
-        queryset=get_user_model().objects.all(),
-        widget=forms.CheckboxSelectMultiple,
-        required=False,
-    )
-
     class Meta:
         model = Task
-        fields = "__all__"
+        fields = (
+            "name",
+            "description",
+            "deadline",
+            "priority",
+            "task_type",
+            "team"
+        )
         widgets = {
             "deadline": forms.DateTimeInput(attrs={"type": "datetime-local"}),
         }

@@ -1,5 +1,6 @@
-from django.contrib.auth import login, get_user_model
+from django.contrib.auth import login
 from django.contrib.auth.mixins import LoginRequiredMixin
+
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
@@ -54,6 +55,7 @@ class TeamListView(LoginRequiredMixin, generic.ListView):
     model = Team
     template_name = "task_manager/team_list.html"
     context_object_name = "team_list"
+    paginate_by = 10
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(TeamListView, self).get_context_data(**kwargs)
@@ -82,6 +84,7 @@ class UserTeamListView(LoginRequiredMixin, generic.ListView):
 
     model = Team
     template_name = "task_manager/user_team_list.html"
+    paginate_by = 10
 
 
 class TeamCreateView(LoginRequiredMixin, generic.CreateView):
@@ -107,8 +110,9 @@ class TeamDetailView(LoginRequiredMixin, generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["user"] = self.request.user
-        context["is_user_teammate"] = \
-            self.object.teammates.filter(id=self.request.user.id).exists()
+        context["is_user_teammate"] = self.object.teammates.filter(
+            id=self.request.user.id
+        ).exists()
         return context
 
 
@@ -123,6 +127,7 @@ class AssignUserToTeamView(LoginRequiredMixin, generic.View):
 
 
 class RemoveUserFromTeamView(LoginRequiredMixin, generic.View):
+
     @staticmethod
     def post(request, pk):
         team = get_object_or_404(Team, pk=pk)
@@ -136,6 +141,7 @@ class TaskListView(LoginRequiredMixin, generic.ListView):
     model = Task
     template_name = "task_manager/task_list.html"
     context_object_name = "task_list"
+    paginate_by = 10
 
     def get(self, request):
         user = request.user
@@ -149,8 +155,9 @@ class TaskListView(LoginRequiredMixin, generic.ListView):
         return render(request, self.template_name, context)
 
     def get_context_data(self, **kwargs):
-
         context = super().get_context_data(**kwargs)
+        if self.request.user.is_authenticated:
+            context["assignee"] = self.request.user
         context["task_need_help_form"] = TaskNeedHelpForm()
         context["task_status_form"] = TaskStatusForm()
         return context
@@ -176,6 +183,7 @@ class UserTaskListView(LoginRequiredMixin, generic.ListView):
 
     model = Task
     template_name = "task_manager/user_task_list.html"
+    paginate_by = 10
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -234,7 +242,7 @@ class TaskCreateView(LoginRequiredMixin, generic.CreateView):
     form_class = TaskForm
 
 
-class TaskDeleteView(LoginRequiredMixin, generic.DetailView):
+class TaskDeleteView(LoginRequiredMixin, generic.DeleteView):
 
     model = Task
     template_name = "task_manager/task_confirm_delete.html"

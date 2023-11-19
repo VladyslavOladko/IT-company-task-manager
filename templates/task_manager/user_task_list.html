@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% load crispy_forms_filters %}
 
+{% block title %}
+<title>Own tasks | Symphony</title>
+{% endblock %}
+
 {% block content %}
 
 <h1>
@@ -44,7 +48,7 @@
                 </a>
             </td>
             <td>
-              {{ task.assignees.all|join:", " }}
+              {{ task.assignees.all.count }}
             </td>
             <td>
                {% include "includes/need_help_button.html" %}
@@ -56,5 +60,6 @@
   <p>There are no one task</p>
 {% endif %}
 
+{% include 'includes/pagination.html' %}
 
 {% endblock %}

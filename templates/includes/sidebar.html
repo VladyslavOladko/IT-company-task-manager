@@ -2,7 +2,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
 
-    <a class="navbar-brand" href="#">Symphony</a>
+    <a class="navbar-brand navbar-logo" href="{% url 'task_manager:index' %}">Symphony</a>
 
     <div class="collapse navbar-collapse">
     <ul class="navbar-nav mr-auto sidenav">
@@ -16,7 +16,7 @@
                             <a class="nav-link" href="{% url 'logout' %}">Logout</a>
                         </li>
                     </div>
-                        <img class="img-icon" src="{% static 'img/icon-admin.png' %}" alt="admin picture">
+                        <img class="img-icon" src="{% static 'img/iconAdmin.png' %}" alt="admin picture">
                 </div>
             {% else %}
                 <div class="user-panel-wrapper">
@@ -26,7 +26,7 @@
                             <a class="nav-link" href="{% url 'logout' %}">Logout</a>
                         </li>
                     </div>
-                    <img class="img-icon" src="{% static 'img/icon-user.png' %}" alt="user picture">
+                    <img class="img-icon" src="{% static 'img/iconUser.png' %}" alt="user picture">
                 </div>
             {% endif %}
         {% else %}

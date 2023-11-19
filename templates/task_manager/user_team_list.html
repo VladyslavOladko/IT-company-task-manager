@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 
+{% block title %}
+<title>Your teams | Symphony</title>
+{% endblock %}
+
 {% block content %}
 
 <title>Your teams</title>
@@ -14,24 +18,20 @@
   <table class="table">
     <thead class="thead-light">
       <tr>
-        <th>ID</th>
-        <th style="padding-left: 10rem">Name</th>
-        <th style="padding-left: 10rem">Assignees</th>
+        <th style="padding-left: 2rem">Name</th>
+        <th style="padding-left: 10rem">Teammates</th>
       </tr>
     </thead>
 
     {% for team in user.teams.all %}
     <tr>
-        <td>
-          {{ team.id }}
-        </td>
-        <td style="padding-left: 10rem">
+        <td style="padding-left: 2rem">
           <a class="link-to-absolute" href="{{ team.get_absolute_url }}">
             {{ team.name }}
           </a>
         </td>
         <td style="padding-left: 10rem">
-          {{ team.teammates.all|join:", " }}
+          {{ team.teammates.all.count }}
         </td>
       </tr>
     {% endfor %}

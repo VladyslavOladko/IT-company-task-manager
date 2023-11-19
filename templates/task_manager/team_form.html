@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% load crispy_forms_filters %}
 
+{% block title %}
+    <title>{{ object|yesno:"Update,Create" }} team | Symphony</title>
+{% endblock %}
+
 {% block content %}
 
 <h1>{{ object|yesno:"Update,Create" }} Team</h1>

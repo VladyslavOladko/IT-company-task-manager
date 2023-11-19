@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 
+{% block title %}
+    <title>{{ team.name }} team | Symphony</title>
+{% endblock %}
+
 {% block content %}
 
   <h1>
@@ -20,6 +24,7 @@
     {% endif %}
   </h1>
 
+<h3>Teammates:</h3>
 
   <table class="table">
     <thead class="thead-light">
@@ -43,5 +48,54 @@
     {% endfor %}
   </table>
 
+<h3>Team`s tasks:</h3>
+
+{% if team.tasks.all %}
+ <table class="table">
+   <thead class="thead-light">
+     <tr>
+      <th>Name</th>
+      <th>Deadline</th>
+      <th>Status</th>
+      <th>Priority</th>
+      <th>Assignees:</th>
+      <th></th>
+    </tr>
+   </thead>
+
+    {% for task in team.tasks.all %}
+    <a class="link-to-absolute" href="{{ task.get_absolute_url }}">
+        <tr>
+        <td>
+            <a class="link-to-absolute" href="{{ task.get_absolute_url }}">
+                {{ task.name }}
+            </a>
+        </td>
+        <td>
+            <a class="link-to-absolute" href="{{ task.get_absolute_url }}">
+                {{ task.deadline }}
+            </a>
+        </td>
+        <td>
+          {% include "includes/status_button.html" %}
+        </td>
+        <td>
+            <a class="link-to-absolute" href="{{ task.get_absolute_url }}">
+                {{ task.priority }}
+            </a>
+        </td>
+        <td>
+          {{ task.assignees.all.count }}
+        </td>
+        <td>
+          {% include "includes/need_help_button.html" %}
+        </td>
+      </tr>
+    {% endfor %}
+    </a>
+  </table>
+{% else %}
+  <p>There are no one task</p>
+{% endif %}
 
 {% endblock %}

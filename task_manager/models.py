@@ -49,8 +49,7 @@ class Employee(AbstractUser):
 class Team(models.Model):
     name = models.CharField(
         max_length=255,
-        blank=True,
-        null=True,
+        unique=True,
     )
     teammates = models.ManyToManyField(
         settings.AUTH_USER_MODEL,
@@ -81,8 +80,8 @@ class Task(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(max_length=1024)
     deadline = models.DateTimeField()
-    is_completed = models.BooleanField()
-    is_need_help = models.BooleanField()
+    is_completed = models.BooleanField(default=False)
+    is_need_help = models.BooleanField(default=False)
     priority = models.CharField(
         max_length=8,
         choices=PRIORITY,

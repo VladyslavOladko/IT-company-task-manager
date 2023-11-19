@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% load crispy_forms_filters %}
 
+{% block title %}
+  <title>Log In | Symphony</title>
+{% endblock %}
+
 {% block content %}
 <h1>Login</h1>
 {% if form.errors %}

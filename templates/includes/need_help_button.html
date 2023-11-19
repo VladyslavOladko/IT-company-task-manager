@@ -1,5 +1,5 @@
 <form method="post">
   {% csrf_token %}
   <input type="hidden" name="is_need_help_task_id" value="{{ task.id }}">
-  <button type="submit" class="btn {{ task.is_need_help|yesno:'btn-warning,btn-secondary' }}">{{ task.is_need_help|yesno:"Need Help,Press if need help" }}</button>
+  <button type="submit" class="btn {{ task.is_need_help|yesno:'btn-warning,btn-outline-secondary' }}">{{ task.is_need_help|yesno:"Need Help,Press if need help" }}</button>
 </form>

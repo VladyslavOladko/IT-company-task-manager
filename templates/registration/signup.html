@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% load crispy_forms_filters %}
 
+{% block title %}
+  <title>Sign Up | Symphony</title>
+{% endblock %}
+
 {% block content %}
 <form method="post">
     {% csrf_token %}

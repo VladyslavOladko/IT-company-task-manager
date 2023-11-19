@@ -6,6 +6,10 @@ Django project wit user-friendly interface for teams, where users can solve team
 
 link
 
+## Database Structure
+
+![Models](models-diagram.png)
+
 ## Installation
 
 Python3 must be already installed

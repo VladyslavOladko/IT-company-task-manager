@@ -4,20 +4,28 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('task_manager', '0009_commentary'),
+        ("task_manager", "0009_commentary"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='task',
-            name='is_need_help',
+            model_name="task",
+            name="is_need_help",
             field=models.BooleanField(default=False),
         ),
         migrations.AlterField(
-            model_name='task',
-            name='priority',
-            field=models.CharField(choices=[('LOW', 'Low'), ('MEDIUM', 'Medium'), ('HIGH', 'High'), ('URGENT', 'Urgent'), ('CRITICAL', 'Critical')], max_length=8),
+            model_name="task",
+            name="priority",
+            field=models.CharField(
+                choices=[
+                    ("LOW", "Low"),
+                    ("MEDIUM", "Medium"),
+                    ("HIGH", "High"),
+                    ("URGENT", "Urgent"),
+                    ("CRITICAL", "Critical"),
+                ],
+                max_length=8,
+            ),
         ),
     ]

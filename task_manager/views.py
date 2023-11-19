@@ -12,7 +12,8 @@ from task_manager.foms import (
     TaskForm,
     TaskStatusForm,
     TeamSearchForm,
-    CommentForm, TaskNeedHelpForm
+    CommentForm,
+    TaskNeedHelpForm,
 )
 
 from task_manager.models import (
@@ -24,7 +25,6 @@ from task_manager.models import (
 
 
 def index(request):
-
     num_teams = Team.objects.all().count
     num_users = Employee.objects.all().count
     is_home_page = True
@@ -39,7 +39,6 @@ def index(request):
 
 
 class SignUpView(generic.CreateView):
-
     form_class = SignUpForm
     template_name = "registration/signup.html"
     success_url = reverse_lazy("task_manager:index")
@@ -51,7 +50,6 @@ class SignUpView(generic.CreateView):
 
 
 class TeamListView(LoginRequiredMixin, generic.ListView):
-
     model = Team
     template_name = "task_manager/team_list.html"
     context_object_name = "team_list"
@@ -62,9 +60,7 @@ class TeamListView(LoginRequiredMixin, generic.ListView):
 
         name = self.request.GET.get("name", "")
 
-        context["search_form"] = TeamSearchForm(
-            initial={"name": name}
-        )
+        context["search_form"] = TeamSearchForm(initial={"name": name})
 
         return context
 
@@ -73,22 +69,18 @@ class TeamListView(LoginRequiredMixin, generic.ListView):
         form = TeamSearchForm(self.request.GET)
 
         if form.is_valid():
-            return queryset.filter(
-                name__icontains=form.cleaned_data["name"]
-            )
+            return queryset.filter(name__icontains=form.cleaned_data["name"])
 
         return queryset
 
 
 class UserTeamListView(LoginRequiredMixin, generic.ListView):
-
     model = Team
     template_name = "task_manager/user_team_list.html"
     paginate_by = 10
 
 
 class TeamCreateView(LoginRequiredMixin, generic.CreateView):
-
     model = Team
     form_class = TeamForm
     success_url = reverse_lazy("task_manager:team-list")
@@ -96,14 +88,12 @@ class TeamCreateView(LoginRequiredMixin, generic.CreateView):
 
 
 class TeamUpdateView(LoginRequiredMixin, generic.UpdateView):
-
     model = Team
     form_class = TeamForm
     template_name = "task_manager/team_form.html"
 
 
 class TeamDetailView(LoginRequiredMixin, generic.DetailView):
-
     model = Team
     form_class = TeamForm
 
@@ -117,7 +107,6 @@ class TeamDetailView(LoginRequiredMixin, generic.DetailView):
 
 
 class AssignUserToTeamView(LoginRequiredMixin, generic.View):
-
     @staticmethod
     def post(request, pk):
         team = get_object_or_404(Team, pk=pk)
@@ -127,7 +116,6 @@ class AssignUserToTeamView(LoginRequiredMixin, generic.View):
 
 
 class RemoveUserFromTeamView(LoginRequiredMixin, generic.View):
-
     @staticmethod
     def post(request, pk):
         team = get_object_or_404(Team, pk=pk)
@@ -137,7 +125,6 @@ class RemoveUserFromTeamView(LoginRequiredMixin, generic.View):
 
 
 class TaskListView(LoginRequiredMixin, generic.ListView):
-
     model = Task
     template_name = "task_manager/task_list.html"
     context_object_name = "task_list"
@@ -148,9 +135,7 @@ class TaskListView(LoginRequiredMixin, generic.ListView):
         user_teams = user.teams.all()
         tasks = Task.objects.filter(team__in=user_teams)
 
-        context = {
-            'tasks': tasks
-        }
+        context = {"tasks": tasks}
 
         return render(request, self.template_name, context)
 
@@ -180,7 +165,6 @@ class TaskListView(LoginRequiredMixin, generic.ListView):
 
 
 class UserTaskListView(LoginRequiredMixin, generic.ListView):
-
     model = Task
     template_name = "task_manager/user_task_list.html"
     paginate_by = 10
@@ -211,14 +195,14 @@ class UserTaskListView(LoginRequiredMixin, generic.ListView):
 
 
 class TaskDetailView(LoginRequiredMixin, generic.DetailView):
-
     model = Task
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["user"] = self.request.user
-        context["is_user_assignee"] = \
-            self.object.assignees.filter(id=self.request.user.id).exists()
+        context["is_user_assignee"] = self.object.assignees.filter(
+            id=self.request.user.id
+        ).exists()
         context["task_status_form"] = TaskStatusForm()
         return context
 
@@ -231,26 +215,22 @@ class TaskDetailView(LoginRequiredMixin, generic.DetailView):
 
 
 class TaskUpdateView(LoginRequiredMixin, generic.UpdateView):
-
     model = Task
     form_class = TaskForm
 
 
 class TaskCreateView(LoginRequiredMixin, generic.CreateView):
-
     model = Task
     form_class = TaskForm
 
 
 class TaskDeleteView(LoginRequiredMixin, generic.DeleteView):
-
     model = Task
     template_name = "task_manager/task_confirm_delete.html"
     success_url = reverse_lazy("task_manager:task-list")
 
 
 class AssignUserToTaskView(LoginRequiredMixin, generic.View):
-
     @staticmethod
     def post(request, pk):
         task = get_object_or_404(Task, pk=pk)

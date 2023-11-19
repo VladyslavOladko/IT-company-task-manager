@@ -6,7 +6,6 @@ from it_company_task_manager import settings
 
 
 class TaskType(models.Model):
-
     name = models.CharField(max_length=255)
 
     class Meta:
@@ -17,7 +16,6 @@ class TaskType(models.Model):
 
 
 class Position(models.Model):
-
     name = models.CharField(max_length=255)
 
     class Meta:
@@ -28,13 +26,12 @@ class Position(models.Model):
 
 
 class Employee(AbstractUser):
-
     position = models.ForeignKey(
         Position,
         on_delete=models.CASCADE,
         related_name="employees",
         null=True,
-        blank=True
+        blank=True,
     )
 
     class Meta:
@@ -43,7 +40,9 @@ class Employee(AbstractUser):
         verbose_name_plural = "employees"
 
     def __str__(self):
-        return f"|{self.username}|  {self.first_name} {self.last_name} ({self.position})"
+        return (
+            f"|{self.username}|  {self.first_name} {self.last_name} ({self.position})"
+        )
 
 
 class Team(models.Model):
@@ -68,13 +67,24 @@ class Team(models.Model):
 
 
 class Task(models.Model):
-
     PRIORITY = [
         ("LOW", "Low"),
-        ("MEDIUM", "Medium",),
-        ("HIGH", "High",),
-        ("URGENT", "Urgent",),
-        ("CRITICAL", "Critical",),
+        (
+            "MEDIUM",
+            "Medium",
+        ),
+        (
+            "HIGH",
+            "High",
+        ),
+        (
+            "URGENT",
+            "Urgent",
+        ),
+        (
+            "CRITICAL",
+            "Critical",
+        ),
     ]
 
     name = models.CharField(max_length=255)
@@ -87,18 +97,12 @@ class Task(models.Model):
         choices=PRIORITY,
     )
     task_type = models.ForeignKey(
-        TaskType,
-        on_delete=models.CASCADE,
-        related_name="tasks"
+        TaskType, on_delete=models.CASCADE, related_name="tasks"
     )
     assignees = models.ManyToManyField(
         settings.AUTH_USER_MODEL,
     )
-    team = models.ForeignKey(
-        Team,
-        on_delete=models.CASCADE,
-        related_name="tasks"
-    )
+    team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name="tasks")
     is_need_help = models.BooleanField(default=False)
 
     class Meta:
@@ -116,11 +120,7 @@ class Commentary(models.Model):
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
     )
-    task = models.ForeignKey(
-        Task,
-        on_delete=models.CASCADE,
-        related_name="comments"
-    )
+    task = models.ForeignKey(Task, on_delete=models.CASCADE, related_name="comments")
     created_time = models.DateTimeField(auto_now_add=True)
     content = models.CharField(max_length=255)
 

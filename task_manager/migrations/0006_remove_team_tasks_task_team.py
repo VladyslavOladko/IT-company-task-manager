@@ -5,20 +5,24 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('task_manager', '0005_team_tasks_alter_team_teammates'),
+        ("task_manager", "0005_team_tasks_alter_team_teammates"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='team',
-            name='tasks',
+            model_name="team",
+            name="tasks",
         ),
         migrations.AddField(
-            model_name='task',
-            name='team',
-            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, related_name='tasks', to='task_manager.team'),
+            model_name="task",
+            name="team",
+            field=models.ForeignKey(
+                default=1,
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="tasks",
+                to="task_manager.team",
+            ),
             preserve_default=False,
         ),
     ]

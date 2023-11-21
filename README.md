@@ -4,7 +4,7 @@ Django project wit user-friendly interface for teams, where users can solve team
 
 ## Check It Out!
 
-link
+![Task manager project deploy to Render](https://symphony-task-manager.onrender.com/home/)
 
 ## Database Structure
 

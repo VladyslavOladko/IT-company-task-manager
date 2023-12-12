@@ -7,32 +7,35 @@
 
 {% block inner_content %}
 
-
-      <div class="header_container">
-        <div class="image_block">
-          <div class="filter"></div>
-        </div>
-        <div class="achievement_block">
-          <div class="header_text_block">
-            <div class="header_text">
-              <h1>Symphony</h1>
-              <h4>Small solution for large and complex team tasks</h4>
-            </div>
-          </div>
-          <div class="achievement_section">
-            <div class="section">
-              <img src="{% static 'img/teamsIcon.png'%}" alt="" class="truck_img" />
-              <h3>Teams, that use Symphony: {{ num_teams }}+</h3>
-            </div>
-            <div class="section">
-              <img src="{% static 'img/usersIcon.png'%}" alt="" class="truck_img" />
-              <h3>All users: {{ num_users }}+</h3>
-            </div>
-            <div class="section">
-              <img src="{% static 'img/helpDeskIcon.png' %}" alt="" class="support_img" />
-              <h3>Personal professional technical support.</h3>
-            </div>
-          </div>
-        </div>
+<div class="header_container">
+  <div class="image_block">
+    <div class="filter"></div>
+  </div>
+  <div class="achievement_block">
+    <div class="header_text_block">
+      <div class="header_text">
+        <h1>Symphony</h1>
+        <h4>Small solution for large and complex team`s tasks</h4>
       </div>
+    </div>
+    <div class="achievement_section">
+      <div class="section">
+        <img src="{% static 'img/teamsIcon.png'%}" alt="" class="truck_img" />
+        <h3>Teams, that use Symphony: {{ num_teams }}+</h3>
+      </div>
+      <div class="section">
+        <img src="{% static 'img/usersIcon.png'%}" alt="" class="truck_img" />
+        <h3>All users: {{ num_users }}+</h3>
+      </div>
+      <div class="section">
+        <img src="{% static 'img/tech-support.png' %}" alt="" class="support_img" />
+        <h3>Technical support.</h3>
+      </div>
+    </div>
+  </div>
+  <a href="{% url 'task_manager:team-list' %}" class="explore-btn">
+      <span class="explore-btn-text">Explore</span>
+  </a>
+</div>
+
 {% endblock %}

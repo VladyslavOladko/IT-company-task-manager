@@ -41,7 +41,7 @@ def index(request):
 class SignUpView(generic.CreateView):
     form_class = SignUpForm
     template_name = "registration/signup.html"
-    success_url = reverse_lazy("task_manager:index")
+    success_url = reverse_lazy("task_manager:team-list")
 
     def form_valid(self, form):
         user = form.save()

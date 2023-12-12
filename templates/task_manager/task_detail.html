@@ -7,93 +7,93 @@
 
 {% block content %}
 
-  <h1>
-    Task`s name: "{{ task.name }}"
+<h2>
+  {{ task.name }}
 
-    <a style="float: right; margin-left: 10px" class="btn btn-warning" href="{% url 'task_manager:task-update' pk=task.id %}">Edit</a>
-    <a style="float: right" class="btn btn-danger" href="{% url 'task_manager:task-delete' pk=task.id %}">Delete</a>
+  <a style="float: right; margin-left: 10px" class="btn btn-warning" href="{% url 'task_manager:task-update' pk=task.id %}">Edit</a>
+  <a style="float: right" class="btn btn-danger" href="{% url 'task_manager:task-delete' pk=task.id %}">Delete</a>
 
-  </h1>
+</h2>
 
-  <div style="margin: 25px 0px">
-    <span class="priority-font">
-      Priority:
-      <span class="{{ task.priority|add:'_priority' }}">
-          {{ task.priority }}
-      </span>
+<div style="margin: 25px 0px">
+  <span class="priority-font">
+    Priority:
+    <span class="{{ task.priority|add:'_priority' }}">
+        {{ task.priority }}
     </span>
-    <div class="deadline-done">
-      <strong>Deadline: </strong>{{ task.deadline }}
-      {% include "includes/status_button.html" %}
-    </div>
+  </span>
+  <div class="deadline-done">
+    <strong>Deadline: </strong>{{ task.deadline }}
+    {% include "includes/status_button.html" %}
   </div>
+</div>
 
 
-  <h3>Description: </h3>
-    <div>{{ task.description }}</div>
-  <br>
-  <div class="nl-3">
+<h3>Description: </h3>
+  <div>{{ task.description }}</div>
+<br>
+<div class="nl-3">
 
-    <h3>Assignees: </h3>
+  <h3>Assignees: </h3>
 
-      <table class="table">
-        <thead class="thead-light">
-          <tr>
-            <th>Username</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>Position</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for assignee in task.assignees.all %}
-          <tr>
-          <th>{{ assignee.username }}</th>
-          <th>{{ assignee.first_name }}</th>
-          <th>{{ assignee.last_name }}</th>
-          <th>{{ assignee.email }}</th>
-          <th>{{ assignee.position }}</th>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+    <table class="table">
+      <thead class="thead-light">
+        <tr>
+          <th>Username</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Position</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for assignee in task.assignees.all %}
+        <tr>
+        <th>{{ assignee.username }}</th>
+        <th>{{ assignee.first_name }}</th>
+        <th>{{ assignee.last_name }}</th>
+        <th>{{ assignee.email }}</th>
+        <th>{{ assignee.position }}</th>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
 
-      {% if is_user_assignee %}
-        <p style="font-size: 12px">Yoy already working with this task!</p>
-      {% else %}
-        <form class="button-take-to-work"  method="post" action="{% url 'task_manager:take-to-work' object.pk %}">
-          {% csrf_token %}
-          <button class="btn btn-success" type="submit">Take to work</button>
-        </form>
-      {% endif %}
-
-  </div>
-   <h3 style="margin-top: 10px">Comments:</h3>
-    {% for comment in task.comments.all %}
-      <hr>
-      <p>
-        <strong>{{ comment.user.username }}</strong>
-        at {{ comment.created_time }}
-      </p>
-
-      <p>
-        {{ comment.content }}
-        <a class="delete-comment btn btn-danger" href="{% url 'task_manager:commentary-delete' pk=comment.id %}">Delete</a>
-      </p>
-    {% empty %}
-      <p>No comments!</p>
-    {% endfor %}
-    {#    <h4><a href="{% url 'task_manager:comment-create'%}">Add comment</a></h4>#}
-    {% if user.is_authenticated %}
-      <form action="{% url 'task_manager:task-add-comment' task.pk %}" method="post" novalidate>
-        {% csrf_token %}
-        <label for="content" class="form-label"><strong>Add your comment</strong></label>
-        <textarea class="form-control mb-2" style="height: 100px" name="content"></textarea>
-        <input style="margin-bottom: 10px;" class="btn btn-secondary" type="submit" value="Add comment">
-      </form>
+    {% if is_user_assignee %}
+      <p style="font-size: 12px">Yoy already working with this task!</p>
     {% else %}
-      <a href="{% url 'login' %}">Login to add comments!</a>
+      <form class="button-take-to-work"  method="post" action="{% url 'task_manager:take-to-work' object.pk %}">
+        {% csrf_token %}
+        <button class="btn btn-success" type="submit">Take to work</button>
+      </form>
     {% endif %}
+
+</div>
+<h3 style="margin-top: 10px">Comments:</h3>
+{% for comment in task.comments.all %}
+  <hr>
+  <p>
+    <strong>{{ comment.user.username }}</strong>
+    at {{ comment.created_time }}
+  </p>
+
+  <p>
+    {{ comment.content }}
+    <a class="delete-comment btn btn-danger" href="{% url 'task_manager:commentary-delete' pk=comment.id %}">Delete</a>
+  </p>
+{% empty %}
+  <p>No comments!</p>
+{% endfor %}
+{#    <h4><a href="{% url 'task_manager:comment-create'%}">Add comment</a></h4>#}
+{% if user.is_authenticated %}
+  <form action="{% url 'task_manager:task-add-comment' task.pk %}" method="post" novalidate>
+    {% csrf_token %}
+    <label for="content" class="form-label"><strong>Add your comment</strong></label>
+    <textarea class="form-control mb-2" style="height: 100px" name="content"></textarea>
+    <input style="margin-bottom: 10px;" class="btn btn-secondary" type="submit" value="Add comment">
+  </form>
+{% else %}
+  <a href="{% url 'login' %}">Login to add comments!</a>
+{% endif %}
 
 {% endblock %}

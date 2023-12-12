@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html style="margin-top: 10px" lang="en">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,32 +14,22 @@
     {% endblock %}
 </head>
 <body>
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-2">
-            {% block sidebar %}
-                {% include 'includes/sidebar.html' %}
-            {% endblock %}
-        </div>
+
+{% include 'includes/header.html' %}
+{% include 'includes/sidebar.html' %}
 
 
-
-        {% block inner_content %}{% endblock %}
-
+{% block inner_content %}{% endblock %}
 
 
-        <div class="col-sm-10">
-            {% block content %}{% endblock %}
-        </div>
-
-    </div>
+<div class="block-content">
+    {% block content %}{% endblock %}
 </div>
-    <footer class="footer">
-      <div class="container">
-          <div class="text-center">
-              <span>Symphony inc, 2023</span>
-          </div>
-      </div>
-    </footer>
+
+{% include 'includes/footer.html' %}
+
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
 </html>

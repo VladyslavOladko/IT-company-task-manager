@@ -1,0 +1,50 @@
+{% load static %}
+
+<header>
+    {% if user.is_authenticated %}
+        {% if user.is_staff %}
+            <div class="logo">
+                <img src="{% static 'img/symphonyLogoHeader.png' %}" alt="">
+            </div>
+            <div class="user-panel-wrapper">
+                <img class="img-icon" src="{% static 'img/iconAdmin.png' %}" alt="admin picture">
+
+                <div>
+                    <li class="nav-item-without-link">Admin</li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                    </li>
+                </div>
+            </div>
+        {% else %}
+            <div class="logo">
+                <img src="{% static 'img/symphonyLogoHeader.png' %}" alt="">
+            </div>
+            <div class="user-panel-wrapper">
+                <img class="img-icon" src="{% static 'img/iconUser.png' %}" alt="admin picture">
+
+                <div>
+                    <li class="nav-item-without-link">User</li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                    </li>
+                </div>
+            </div>
+        {% endif %}
+    {% else %}
+        <div class="logo">
+                <img src="{% static 'img/symphonyLogoHeader.png' %}" alt="">
+            </div>
+            <div class="user-panel-wrapper">
+
+                <div>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'task_manager:signup' %}">Sign Up</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Log In</a>
+                    </li>
+                </div>
+            </div>
+    {% endif %}
+</header>

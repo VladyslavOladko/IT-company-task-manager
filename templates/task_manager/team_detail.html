@@ -59,7 +59,6 @@
       <th>Status</th>
       <th>Priority</th>
       <th>Assignees:</th>
-      <th></th>
     </tr>
    </thead>
 
@@ -77,7 +76,11 @@
             </a>
         </td>
         <td>
-          {% include "includes/status_button.html" %}
+          {% if task.is_completed %}
+            Done
+          {% else %}
+            Pending
+          {% endif %}
         </td>
         <td>
             <a class="link-to-absolute" href="{{ task.get_absolute_url }}">
@@ -86,9 +89,6 @@
         </td>
         <td>
           {{ task.assignees.all.count }}
-        </td>
-        <td>
-          {% include "includes/need_help_button.html" %}
         </td>
       </tr>
     {% endfor %}

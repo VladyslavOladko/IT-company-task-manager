@@ -266,6 +266,3 @@ class CommentaryDeleteView(LoginRequiredMixin, generic.DeleteView):
         task_id = commentary.task.id
         task_url = reverse("task_manager:task-detail", kwargs={"pk": task_id})
         return task_url
-
-    def post(self, request, *args, **kwargs):
-        return super().post(request, *args, **kwargs)

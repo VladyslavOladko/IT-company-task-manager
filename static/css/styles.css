@@ -84,6 +84,7 @@ a.link-to-absolute:hover {
     overflow: hidden;
 }
 
+
 .image_block {
     width: 99vw;
     max-width: 1920px;
@@ -199,6 +200,94 @@ a.link-to-absolute:hover {
     font-size: 23px;
     line-height: 28px;
     letter-spacing: 1px;
+}
+
+@media (min-width: 370px) and (max-width: 415px) {
+    .image_block {
+        width: 291vw;
+        max-width: 1800px;
+        height: 456px;
+        background: url(../img/headerPhoto.jpg);
+        background-position: center;
+    }
+
+    .filter {
+        position: absolute;
+        width: 100vw;
+        max-width: 1931px;
+        height: 457px;
+        left: 0px;
+        top: 0px;
+        background: rgba(0, 0, 0, 0.7);
+    }
+
+    .achievement_block {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: absolute;
+        width: 99vw;
+        max-width: 1046px;
+        left: calc(50% - 1046px/2);
+        top: 30px;
+    }
+
+    .header_text_block {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0px;
+        color: #FFFFFF;
+        width: 701px;
+        height: 450px;
+    }
+
+    .header_text>h1 {
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 2.5rem;
+        text-align: center;
+        letter-spacing: 10px;
+        margin: 6rem 10px 2rem;
+        padding-left: 43rem;
+    }
+
+    .achievement_section {
+        transform: translate(339px, -63px);
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 360px;
+    }
+
+    .section {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 16px;
+        width: 103px;
+        height: 87px;
+        background: #FFFFFF;
+        box-shadow: 0px 13px 19px rgba(0, 0, 0, 0.07);
+        color: #c8a06a;
+    }
+
+    .truck_img {
+        width: 43px;
+        margin: -15px -2px;
+    }
+
+    .section>h3 {
+        padding-top: 13px;
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 10px;
+        line-height: 10px;
+        letter-spacing: 1px;
+    }
+    
 }
 
 .deadline-done {

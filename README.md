@@ -6,6 +6,10 @@ Django project wit user-friendly interface for teams, where users can solve team
 
 https://symphony-task-manager.onrender.com/home/
 
+You can use test user:
+**username**: test_user1, 
+**password**: testpass123
+
 ## Database Structure
 
 ![Models](models-diagram.png)

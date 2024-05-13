@@ -1,6 +1,6 @@
 # IT-company-task-manager
 
-Django project wit user-friendly interface for teams, where users can solve team`s and own task
+Django project with user-friendly interface for teams, where users can solve team`s and own task
 
 ## Check It Out!
 

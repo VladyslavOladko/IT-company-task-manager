@@ -1,10 +1,14 @@
 # IT-company-task-manager
 
-Django project wit user-friendly interface for teams, where users can solve team`s and own task
+Django project with user-friendly interface for teams, where users can solve team`s and own tasks
 
 ## Check It Out!
 
 https://symphony-task-manager.onrender.com/home/
+
+You can use test user:
+**username**: test_user1, 
+**password**: testpass123
 
 ## Database Structure
 
